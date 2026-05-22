@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import Gallery from '../../components/Gallery.astro';
+import Booking from '../../components/Booking.astro';
+import Map from '../../components/Map.astro';
+import Prices from '../../components/Prices.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'en' as const;
+---
+
+<Layout
+  title="Mondello Holiday — Holiday Home in Mondello, Palermo"
+  description="Bright apartment in Mondello, the most beautiful beach in Palermo. Steps from the sea, in the heart of Sicily."
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main>
+    <Hero lang={lang} />
+    <Gallery lang={lang} />
+    <Booking lang={lang} />
+    <Map lang={lang} />
+    <Prices lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</Layout>

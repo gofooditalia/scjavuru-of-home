@@ -1,0 +1,79 @@
+---
+import '../styles/global.css';
+import type { Lang } from '../i18n/index';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang: Lang;
+}
+
+const { title, description = '', lang } = Astro.props;
+
+// ✏️ Sostituisci con i tuoi URL canonici
+const canonicalIt = 'https://tuodominio.it/';
+const canonicalEn = 'https://tuodominio.it/en/';
+
+const isIT = lang === 'it';
+const fb = {
+  title:         isIT ? 'Prenota o contattaci'                          : 'Book or contact us',
+  description:   isIT ? 'Indica le date per ricevere il prezzo scontato' : 'Include your dates for a discounted rate',
+  nameLabel:     isIT ? 'Nome'        : 'Name',
+  namePh:        isIT ? 'Il tuo nome' : 'Your name',
+  checkinLabel:  isIT ? 'Data arrivo'   : 'Check-in date',
+  checkoutLabel: isIT ? 'Data partenza' : 'Check-out date',
+  datePh:        'gg/mm/aaaa',
+  msgLabel:      isIT ? 'Messaggio'              : 'Message',
+  msgPh:         isIT ? 'Domande o richieste...' : 'Questions or requests...',
+  submit:        isIT ? 'Invia richiesta' : 'Send request',
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {description && <meta name="description" content={description} />}
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="alternate" hreflang="it" href={canonicalIt} />
+    <link rel="alternate" hreflang="en" href={canonicalEn} />
+    <link rel="alternate" hreflang="x-default" href={canonicalIt} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3/dist/css/glightbox.min.css" />
+  </head>
+  <body class="font-sans text-slate-800 bg-white antialiased">
+    <slot />
+    <script is:inline src="https://cdn.jsdelivr.net/npm/glightbox@3/dist/js/glightbox.min.js"></script>
+
+    <!-- Formspree Formbutton -->
+    <script is:inline define:vars={{ fb }}>
+      window.formbutton = window.formbutton || function () {
+        (formbutton.q = formbutton.q || []).push(arguments);
+      };
+      formbutton('create', {
+        action: 'https://formspree.io/f/XXXXXXXX', // ✏️ Il tuo endpoint Formspree
+        title: fb.title,
+        description: fb.description,
+        loadGoogleFonts: false,
+        fields: [
+          { type: 'text',     name: 'name',     label: fb.nameLabel,     required: true, placeholder: fb.namePh },
+          { type: 'email',    name: 'email',     label: 'Email',          required: true, placeholder: 'email@esempio.com' },
+          { type: 'text',     name: 'checkin',   label: fb.checkinLabel,  placeholder: fb.datePh },
+          { type: 'text',     name: 'checkout',  label: fb.checkoutLabel, placeholder: fb.datePh },
+          { type: 'textarea', name: 'message',   label: fb.msgLabel,      placeholder: fb.msgPh },
+          { type: 'submit',   value: fb.submit },
+        ],
+        styles: {
+          title:  { background: '#0c4a6e' },
+          button: { background: '#fbbf24' },
+        },
+      });
+    </script>
+    <script is:inline src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+  </body>
+</html>

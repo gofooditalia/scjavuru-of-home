@@ -1,0 +1,147 @@
+---
+import { t } from '../i18n/index';
+import type { Lang } from '../i18n/index';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const tr = t(lang);
+const altLang = lang === 'it' ? 'EN' : 'IT';
+const altHref = lang === 'it' ? '/en/' : '/';
+const homeHref = lang === 'it' ? '/' : '/en/';
+
+const navLinks = [
+  { href: '#galleria', label: tr.nav.gallery },
+  { href: '#prenota', label: tr.nav.booking },
+  { href: '#dove-siamo', label: tr.nav.location },
+  { href: '#prezzi', label: tr.nav.prices },
+];
+---
+
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+
+      <!-- Logo -->
+      <a href={homeHref} class="header-logo font-display font-bold text-xl lg:text-2xl transition-colors">
+        Mondello Holiday
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden lg:flex items-center gap-8">
+        {navLinks.map(({ href, label }) => (
+          <a href={href} class="header-link text-sm font-medium tracking-widest uppercase transition-colors">
+            {label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Right: lang switcher + hamburger -->
+      <div class="flex items-center gap-3">
+        <a href={altHref} class="header-lang text-sm font-semibold tracking-widest uppercase rounded px-2.5 py-1 border transition-colors">
+          {altLang}
+        </a>
+        <button id="menu-toggle" class="header-btn lg:hidden p-1" aria-label="Menu">
+          <svg id="icon-open" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="icon-close" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-white/20 pb-4">
+      <nav class="flex flex-col gap-4 pt-4">
+        {navLinks.map(({ href, label }) => (
+          <a href={href} class="header-link text-sm font-medium tracking-widest uppercase transition-colors mobile-link">
+            {label}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </div>
+</header>
+
+<style>
+  header {
+    background: transparent;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  header.scrolled {
+    background-color: white;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .header-logo {
+    color: white;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  }
+  header.scrolled .header-logo {
+    color: #0284c7;
+    text-shadow: none;
+  }
+
+  .header-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+  .header-link:hover { color: #fbbf24; }
+  header.scrolled .header-link {
+    color: #475569;
+    text-shadow: none;
+  }
+  header.scrolled .header-link:hover { color: #0284c7; }
+
+  .header-lang {
+    color: rgba(255, 255, 255, 0.85);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+  .header-lang:hover { color: #fbbf24; border-color: #fbbf24; }
+  header.scrolled .header-lang {
+    color: #475569;
+    border-color: #cbd5e1;
+  }
+  header.scrolled .header-lang:hover { color: #0284c7; border-color: #0284c7; }
+
+  .header-btn {
+    color: white;
+  }
+  header.scrolled .header-btn { color: #1e293b; }
+</style>
+
+<script is:inline>
+(function () {
+  const header = document.getElementById('site-header');
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+
+  function updateScroll() {
+    if (!header) return;
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  }
+  window.addEventListener('scroll', updateScroll, { passive: true });
+  updateScroll();
+
+  menuToggle?.addEventListener('click', function () {
+    const isHidden = mobileMenu?.classList.contains('hidden');
+    mobileMenu?.classList.toggle('hidden', !isHidden);
+    iconOpen?.classList.toggle('hidden', isHidden);
+    iconClose?.classList.toggle('hidden', !isHidden);
+  });
+
+  document.querySelectorAll('.mobile-link').forEach(function (link) {
+    link.addEventListener('click', function () {
+      mobileMenu?.classList.add('hidden');
+      iconOpen?.classList.remove('hidden');
+      iconClose?.classList.add('hidden');
+    });
+  });
+})();
+</script>

@@ -1,0 +1,122 @@
+---
+import { t } from '../i18n/index';
+import type { Lang } from '../i18n/index';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const f = t(lang).form;
+
+// ✏️ SETUP FORMSPREE (una tantum)
+// 1. Vai su https://formspree.io e registrati
+// 2. Crea un nuovo form
+// 3. Sostituisci l'endpoint qui sotto
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/XXXXXXXX'; // ✏️
+
+const today = new Date().toISOString().split('T')[0];
+
+// ✏️ Aggiorna con i nomi reali delle camere
+const rooms = ['Camera 1', 'Camera 2', 'Camera 3'];
+---
+
+<div class="bg-white rounded-2xl shadow-xl p-8 lg:p-10">
+
+  <div data-fs-success class="text-center py-6">
+    <div class="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-5">
+      <svg class="w-8 h-8 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+    <h3 class="font-display font-bold text-xl text-slate-800 mb-2">{f.successTitle}</h3>
+    <p class="text-slate-500 text-sm">{f.successMsg}</p>
+  </div>
+
+  <div data-fs-error class="mb-5 text-sm text-rose-600 bg-rose-50 border border-rose-100 rounded-lg px-4 py-3"></div>
+
+  <form id="contact-form">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
+
+      <div class="flex flex-col gap-1">
+        <label class="field-label" for="cf-name">{f.name} <span class="text-rose-400">*</span></label>
+        <input id="cf-name" name="name" type="text" required placeholder={f.namePlaceholder} data-fs-field class="field-input" />
+        <span data-fs-error="name" class="err-msg"></span>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label class="field-label" for="cf-email">{f.email} <span class="text-rose-400">*</span></label>
+        <input id="cf-email" name="email" type="email" required placeholder={f.emailPlaceholder} data-fs-field class="field-input" />
+        <span data-fs-error="email" class="err-msg"></span>
+      </div>
+
+      <div class="flex flex-col gap-1 sm:col-span-2">
+        <label class="field-label" for="cf-room">{f.room}</label>
+        <select id="cf-room" name="room" data-fs-field class="field-input">
+          <option value="">{f.roomDefault}</option>
+          {rooms.map((r) => <option value={r}>{r}</option>)}
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label class="field-label" for="cf-checkin">{f.checkin} <span class="text-rose-400">*</span></label>
+        <input id="cf-checkin" name="checkin" type="date" required min={today} data-fs-field class="field-input" />
+        <span data-fs-error="checkin" class="err-msg"></span>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label class="field-label" for="cf-checkout">{f.checkout} <span class="text-rose-400">*</span></label>
+        <input id="cf-checkout" name="checkout" type="date" required min={today} data-fs-field class="field-input" />
+        <span data-fs-error="checkout" class="err-msg"></span>
+      </div>
+
+      <div class="flex flex-col gap-1 sm:col-span-2">
+        <label class="field-label" for="cf-message">{f.message}</label>
+        <textarea id="cf-message" name="message" rows="3" placeholder={f.messagePlaceholder} data-fs-field class="field-input resize-none"></textarea>
+        <span data-fs-error="message" class="err-msg"></span>
+      </div>
+
+    </div>
+
+    <button type="submit" data-fs-submit-btn
+      class="mt-6 w-full flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-slate-900 font-semibold text-base px-8 py-3.5 rounded-full transition-all duration-200 hover:scale-[1.02] shadow-md shadow-amber-400/30 disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100">
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+      </svg>
+      {f.submit}
+    </button>
+  </form>
+</div>
+
+<style>
+  .field-label { font-size: 0.8125rem; font-weight: 500; color: #475569; }
+  .field-input {
+    width: 100%; border: 1px solid #e2e8f0; border-radius: 0.625rem;
+    padding: 0.625rem 0.875rem; font-size: 0.9375rem; color: #1e293b;
+    background: #f8fafc; outline: none; transition: border-color 0.15s, box-shadow 0.15s;
+    font-family: inherit;
+  }
+  .field-input:focus { border-color: #0ea5e9; box-shadow: 0 0 0 3px rgba(14,165,233,0.12); background: #fff; }
+  .field-input[aria-invalid="true"] { border-color: #f43f5e; box-shadow: 0 0 0 3px rgba(244,63,94,0.1); }
+  .field-input::placeholder { color: #94a3b8; }
+  select.field-input { appearance: auto; }
+  .err-msg { font-size: 0.75rem; color: #f43f5e; min-height: 1rem; }
+</style>
+
+<script is:inline>
+  window.formspree = window.formspree || function () {
+    (formspree.q = formspree.q || []).push(arguments);
+  };
+  formspree('initForm', { formElement: '#contact-form', formId: 'XXXXXXXX' }); // ✏️ stesso ID del tuo endpoint
+  document.addEventListener('DOMContentLoaded', function () {
+    var cin = document.getElementById('cf-checkin');
+    var cout = document.getElementById('cf-checkout');
+    if (cin && cout) {
+      cin.addEventListener('change', function () {
+        cout.min = this.value;
+        if (cout.value && cout.value <= this.value) cout.value = '';
+      });
+    }
+  });
+</script>
+<script is:inline src="https://unpkg.com/@formspree/ajax@1" defer></script>

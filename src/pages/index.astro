@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Gallery from '../components/Gallery.astro';
+import Booking from '../components/Booking.astro';
+import Map from '../components/Map.astro';
+import Prices from '../components/Prices.astro';
+import Footer from '../components/Footer.astro';
+
+const lang = 'it' as const;
+---
+
+<Layout
+  title="Mondello Holiday — Casa Vacanze a Mondello, Palermo"
+  description="Appartamento luminoso a Mondello, la spiaggia più bella di Palermo. A pochi passi dal mare, nel cuore della Sicilia."
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main>
+    <Hero lang={lang} />
+    <Gallery lang={lang} />
+    <Booking lang={lang} />
+    <Map lang={lang} />
+    <Prices lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</Layout>
