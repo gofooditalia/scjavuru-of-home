@@ -26,7 +26,7 @@ const navLinks = [
 
       <!-- Logo -->
       <a href={homeHref} class="header-logo font-display font-bold text-xl lg:text-2xl transition-colors">
-        Mondello Holiday
+        SCJAVURU of HOME
       </a>
 
       <!-- Desktop nav -->
@@ -70,48 +70,27 @@ const navLinks = [
 <style>
   header {
     background: transparent;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
   }
   header.scrolled {
-    background-color: white;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    background-color: rgba(10, 10, 10, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(251, 191, 36, 0.2);
   }
 
-  .header-logo {
-    color: white;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
-  }
-  header.scrolled .header-logo {
-    color: #0284c7;
-    text-shadow: none;
-  }
+  .header-logo { color: #fbbf24; }
+  .header-logo:hover { color: #fde68a; }
 
-  .header-link {
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  }
+  .header-link { color: rgba(245, 245, 245, 0.75); }
   .header-link:hover { color: #fbbf24; }
-  header.scrolled .header-link {
-    color: #475569;
-    text-shadow: none;
-  }
-  header.scrolled .header-link:hover { color: #0284c7; }
 
   .header-lang {
-    color: rgba(255, 255, 255, 0.85);
-    border-color: rgba(255, 255, 255, 0.4);
+    color: rgba(245, 245, 245, 0.6);
+    border-color: rgba(245, 245, 245, 0.2);
   }
   .header-lang:hover { color: #fbbf24; border-color: #fbbf24; }
-  header.scrolled .header-lang {
-    color: #475569;
-    border-color: #cbd5e1;
-  }
-  header.scrolled .header-lang:hover { color: #0284c7; border-color: #0284c7; }
 
-  .header-btn {
-    color: white;
-  }
-  header.scrolled .header-btn { color: #1e293b; }
+  .header-btn { color: rgba(245, 245, 245, 0.8); }
 </style>
 
 <script is:inline>
