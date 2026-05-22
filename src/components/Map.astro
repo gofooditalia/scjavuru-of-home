@@ -9,13 +9,11 @@ interface Props {
 const { lang } = Astro.props;
 const tr = t(lang);
 
-// ✏️ Sostituisci con il tuo link Google Maps
-const googleMapsUrl = 'https://maps.app.goo.gl/XXXXXXXX';
+const googleMapsUrl = 'https://maps.app.goo.gl/rb424gV757d848Yn7';
 
-// ✏️ Sostituisci con le coordinate reali della struttura
-// Puoi trovarle aprendo Google Maps, clic destro sul punto → "Cosa c'è qui?"
-const LAT = 41.9028;  // ✏️ latitudine
-const LON = 12.4964;  // ✏️ longitudine
+// Via Roma, 443 — Palermo
+const LAT = 38.1227062;
+const LON = 13.3604854;
 
 // Calcolo automatico del bounding box per OpenStreetMap (non modificare)
 const delta = 0.025;
@@ -52,13 +50,12 @@ const osmUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&lay
           <span class="text-slate-700 font-medium">{tr.location.address}</span>
         </div>
 
-        <!-- ✏️ Personalizza questi bullet point con le info reali -->
         <ul class="space-y-3">
           {[
-            lang === 'it' ? '🏖️  Spiaggia a X minuti a piedi' : '🏖️  Beach X minutes on foot',
-            lang === 'it' ? '🛒  Servizi e negozi nelle vicinanze' : '🛒  Shops and services nearby',
-            lang === 'it' ? '🚌  Centro città a X minuti' : '🚌  City centre X minutes away',
-            lang === 'it' ? '✈️  Aeroporto a X minuti in auto' : '✈️  Airport X minutes by car',
+            lang === 'it' ? '🎭  Teatro Massimo a pochi passi' : '🎭  Teatro Massimo steps away',
+            lang === 'it' ? '🛍️  Via Maqueda a 1 km' : '🛍️  Via Maqueda 1 km away',
+            lang === 'it' ? '⛪  Cattedrale di Palermo a 1 km' : '⛪  Palermo Cathedral 1 km away',
+            lang === 'it' ? '✈️  Aeroporto Falcone-Borsellino a 28 km' : '✈️  Falcone-Borsellino airport 28 km away',
           ].map((item) => (
             <li class="flex items-center gap-2 text-slate-600">
               <span>{item}</span>

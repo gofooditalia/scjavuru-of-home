@@ -10,33 +10,14 @@ interface Props {
 const { lang } = Astro.props;
 const tr = t(lang);
 
-// ✏️ Aggiorna i nomi delle camere e i link Airbnb
-const rooms = [
-  {
-    name: 'Camera 1',
-    features: {
-      it: ['Bagno en suite', 'Angolo cottura', 'Camera doppia privata'],
-      en: ['En-suite bathroom', 'Kitchenette', 'Private double room'],
-    },
-    airbnb: '', // ✏️ es. 'https://www.airbnb.it/rooms/XXXXXXXXX'
+const BOOKING_URL = 'https://www.booking.com/hotel/it/scjavuru-of-home.it.html';
+
+const room = {
+  features: {
+    it: ['Aria condizionata', 'Balcone', 'TV a schermo piatto', 'WiFi gratuito', 'Biancheria e asciugamani inclusi'],
+    en: ['Air conditioning', 'Balcony', 'Flat-screen TV', 'Free WiFi', 'Linen and towels included'],
   },
-  {
-    name: 'Camera 2',
-    features: {
-      it: ['Bagno en suite', 'Angolo cottura', 'Camera doppia privata'],
-      en: ['En-suite bathroom', 'Kitchenette', 'Private double room'],
-    },
-    airbnb: '', // ✏️
-  },
-  {
-    name: 'Camera 3',
-    features: {
-      it: ['Bagno en suite', 'Angolo cottura', 'Camera doppia privata'],
-      en: ['En-suite bathroom', 'Kitchenette', 'Private double room'],
-    },
-    airbnb: '', // ✏️
-  },
-];
+};
 ---
 
 <section id="prenota" class="py-20 lg:py-28 bg-sky-900 text-white">
@@ -52,58 +33,36 @@ const rooms = [
       <div class="mt-5 w-14 h-0.5 bg-amber-400 mx-auto"></div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
-      {rooms.map((room) => {
-        const available = !!room.airbnb;
-        const features = lang === 'it' ? room.features.it : room.features.en;
-        return (
-          <div class={[
-            'relative rounded-2xl p-7 flex flex-col',
-            available
-              ? 'bg-white text-slate-800'
-              : 'bg-sky-800/50 text-sky-200 border border-sky-700',
-          ].join(' ')}>
+    <!-- Singola camera — card centrata -->
+    <div class="max-w-sm mx-auto mb-12">
+      <div class="bg-white text-slate-800 rounded-2xl p-8 flex flex-col shadow-xl">
 
-            {!available && (
-              <span class="absolute top-4 right-4 text-xs font-semibold tracking-widest uppercase bg-sky-700 text-sky-200 px-3 py-1 rounded-full">
-                {tr.booking.comingSoon}
-              </span>
-            )}
+        <div class="w-12 h-12 rounded-xl bg-sky-50 flex items-center justify-center mb-5">
+          <svg class="w-6 h-6 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+          </svg>
+        </div>
 
-            <div class={['w-12 h-12 rounded-xl flex items-center justify-center mb-5', available ? 'bg-sky-50' : 'bg-sky-700/50'].join(' ')}>
-              <svg class={['w-6 h-6', available ? 'text-sky-600' : 'text-sky-400'].join(' ')} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+        <h3 class="font-display font-bold text-xl text-slate-800 mb-4">
+          SCJAVURU of HOME
+        </h3>
+
+        <ul class="space-y-2 mb-7">
+          {(lang === 'it' ? room.features.it : room.features.en).map((f) => (
+            <li class="flex items-center gap-2 text-sm text-slate-600">
+              <svg class="w-4 h-4 flex-shrink-0 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
               </svg>
-            </div>
+              {f}
+            </li>
+          ))}
+        </ul>
 
-            <h3 class={['font-display font-bold text-xl mb-4', available ? 'text-slate-800' : 'text-sky-200'].join(' ')}>
-              {room.name}
-            </h3>
-
-            <ul class="space-y-2 mb-7 flex-1">
-              {features.map((f) => (
-                <li class={['flex items-center gap-2 text-sm', available ? 'text-slate-600' : 'text-sky-300'].join(' ')}>
-                  <svg class={['w-4 h-4 flex-shrink-0', available ? 'text-amber-400' : 'text-sky-500'].join(' ')} fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                  </svg>
-                  {f}
-                </li>
-              ))}
-            </ul>
-
-            {available ? (
-              <a href={room.airbnb} target="_blank" rel="noopener noreferrer"
-                class="flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-slate-900 font-semibold text-sm px-5 py-3 rounded-full transition-all duration-200 hover:scale-105 shadow-md">
-                {tr.booking.bookOnAirbnb}
-              </a>
-            ) : (
-              <div class="flex items-center justify-center gap-2 bg-sky-700/50 text-sky-400 text-sm px-5 py-3 rounded-full cursor-not-allowed">
-                {tr.booking.comingSoon}
-              </div>
-            )}
-          </div>
-        );
-      })}
+        <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer"
+          class="flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-slate-900 font-semibold text-sm px-5 py-3 rounded-full transition-all duration-200 hover:scale-105 shadow-md">
+          {tr.booking.bookOnAirbnb}
+        </a>
+      </div>
     </div>
 
     <div class="border-t border-sky-800 pt-12">

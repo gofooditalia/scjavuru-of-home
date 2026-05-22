@@ -8,48 +8,48 @@ export const en: Translations = {
     prices: 'Prices',
   },
   hero: {
-    badge: 'City, Region — Italy', // ✏️
-    title: 'Your home steps from the sea', // ✏️
+    badge: 'Historic Centre, Palermo',
+    title: 'Your home in the heart of Palermo',
     subtitle:
-      'Short description of the property and its ideal location.', // ✏️
+      "Air-conditioned bed & breakfast with balcony in the historic centre, steps away from Teatro Massimo, Via Maqueda and the city's finest landmarks.",
     ctaPrimary: 'Book now',
     ctaSecondary: 'Discover the rooms',
   },
   gallery: {
-    title: 'The Property', // ✏️
-    subtitle: 'Welcoming spaces for your holiday', // ✏️
+    title: 'The Property',
+    subtitle: 'Welcoming spaces in the heart of historic Palermo',
   },
   booking: {
-    title: 'Choose your room',
+    title: 'Book your stay',
     subtitle:
-      'The property has 3 private double rooms. Book on Airbnb or contact us for a discount.', // ✏️
-    bookOnAirbnb: 'Book on Airbnb',
+      'Book on Booking.com or contact us directly for an exclusive discount.',
+    bookOnAirbnb: 'Book on Booking.com',
     comingSoon: 'Coming soon',
     emailCta: 'Send us an email',
   },
   location: {
     title: 'Location',
-    subtitle: 'In the heart of [City], easy to reach', // ✏️
+    subtitle: "In the heart of Palermo's historic centre",
     description:
-      'Description of the location, nearby services, and how to reach the property.', // ✏️
-    address: 'Via Example, 1 — 00000 City (XX)', // ✏️
+      'SCJAVURU of HOME is located in the historic centre of Palermo, 1 km from Fontana Pretoria and the Cathedral, 1 km from Via Maqueda and steps from Teatro Massimo, Piazza Castelnuovo and Teatro Politeama. Falcone-Borsellino airport is just 28 km away.',
+    address: 'Via Roma, 443 — 90139 Palermo (PA)',
     openMap: 'Open in Google Maps',
   },
   prices: {
     title: 'Prices',
-    subtitle: 'Up-to-date rates on Airbnb. Book by email for an exclusive discount.',
+    subtitle: 'Up-to-date rates on Booking.com. Book by email for an exclusive discount.',
     airbnbCard: {
       label: 'Official rates',
-      note: 'Prices vary by season and availability. Check Airbnb for real-time rates.', // ✏️
-      cta: 'View prices on Airbnb',
+      note: 'Prices vary by season and availability. Check Booking.com for real-time updated rates.',
+      cta: 'View prices on Booking.com',
     },
     discountCard: {
       badge: 'Exclusive offer',
       title: 'Book by email, save more',
-      desc: 'If your dates are available and you book by email, we apply a discount vs. Airbnb.', // ✏️
+      desc: 'If your preferred dates are available and you book directly by email, we apply a discount compared to Booking.com rates.',
       cta: 'Request the discount',
     },
-    minStay: 'Minimum stay: 2 nights', // ✏️
+    minStay: 'Minimum stay: 1 night',
   },
   form: {
     name: 'Name',
@@ -66,11 +66,11 @@ export const en: Translations = {
     submitting: 'Sending…',
     successTitle: 'Request sent!',
     successMsg: 'Thank you for writing to us. We will reply within 24 hours.',
-    errorMsg: 'Something went wrong. Please try again or email us directly.',
+    errorMsg: 'Something went wrong. Please try again or email scjavuruhosteria@libero.it.',
   },
   footer: {
-    tagline: 'Holiday home — [City]', // ✏️
+    tagline: 'Bed & breakfast in the historic centre of Palermo',
     contact: 'Contact',
-    rights: '© 2025 [Property Name]. All rights reserved.', // ✏️
+    rights: '© 2025 SCJAVURU of HOME. All rights reserved.',
   },
 };
