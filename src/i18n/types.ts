@@ -20,6 +20,7 @@ export interface FormTranslations {
   submitting: string;
   successTitle: string;
   successMsg: string;
+  successReset: string;
   errorMsg: string;
 }
 

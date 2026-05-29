@@ -11,8 +11,9 @@
     "vite": "^7"
   },
   "dependencies": {
-    "astro": "^6.3.0",
     "@tailwindcss/vite": "^4.3.0",
+    "astro": "^6.3.0",
+    "flatpickr": "^4.6.13",
     "tailwindcss": "^4.3.0"
   }
 }

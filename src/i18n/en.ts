@@ -66,6 +66,7 @@ export const en: Translations = {
     submitting: 'Sending…',
     successTitle: 'Request sent!',
     successMsg: 'Thank you for writing to us. We will reply within 24 hours.',
+    successReset: 'Send another request',
     errorMsg: 'Something went wrong. Please try again or email scjavuruhosteria@libero.it.',
   },
   footer: {

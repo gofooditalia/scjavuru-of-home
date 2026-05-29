@@ -28,55 +28,23 @@ const room = {
         {tr.booking.title}
       </h2>
       <p class="text-lg text-neutral-400 max-w-2xl mx-auto">
-        {tr.booking.subtitle}
+        {lang === 'it'
+          ? 'Scrivici direttamente per ricevere il prezzo scontato — rispondiamo entro 24 ore.'
+          : 'Contact us directly for a discounted rate — we reply within 24 hours.'}
       </p>
       <div class="mt-5 w-14 h-0.5 bg-amber-400 mx-auto"></div>
     </div>
 
-    <!-- Singola camera — card centrata -->
-    <div class="max-w-sm mx-auto mb-12">
-      <div class="bg-[#1a1a1a] text-white rounded-2xl p-8 flex flex-col border border-amber-400/25 shadow-xl shadow-amber-400/5">
+    <!-- Form principale -->
+    <ContactForm lang={lang} />
 
-        <div class="w-12 h-12 rounded-xl bg-amber-400/10 flex items-center justify-center mb-5">
-          <svg class="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-          </svg>
-        </div>
-
-        <h3 class="font-display font-bold text-xl text-white mb-4">
-          SCJAVURU of HOME
-        </h3>
-
-        <ul class="space-y-2 mb-7">
-          {(lang === 'it' ? room.features.it : room.features.en).map((f) => (
-            <li class="flex items-center gap-2 text-sm text-slate-600">
-              <svg class="w-4 h-4 flex-shrink-0 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-              </svg>
-              {f}
-            </li>
-          ))}
-        </ul>
-
-        <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer"
-          class="flex items-center justify-center gap-2 bg-amber-400 hover:bg-amber-500 text-slate-900 font-semibold text-sm px-5 py-3 rounded-full transition-all duration-200 hover:scale-105 shadow-md">
-          {tr.booking.bookOnAirbnb}
-        </a>
-      </div>
-    </div>
-
-    <div class="border-t border-[#2a2a2a] pt-12">
-      <div class="text-center mb-8">
-        <h3 class="font-display font-bold text-2xl text-white mb-2">
-          {lang === 'it' ? 'Scrivi una richiesta' : 'Send a request'}
-        </h3>
-        <p class="text-neutral-400 text-sm">
-          {lang === 'it'
-            ? 'Indica le date e riceverai una conferma con il prezzo scontato.'
-            : 'Include your dates and we\'ll reply with the discounted rate.'}
-        </p>
-      </div>
-      <ContactForm lang={lang} />
-    </div>
+    <!-- Link secondario Booking.com -->
+    <p class="text-center mt-6 text-sm text-neutral-500">
+      {lang === 'it' ? 'Oppure prenota su' : 'Or book on'}
+      <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer"
+        class="text-amber-400/80 hover:text-amber-400 underline underline-offset-4 transition-colors ml-1">
+        Booking.com →
+      </a>
+    </p>
   </div>
 </section>

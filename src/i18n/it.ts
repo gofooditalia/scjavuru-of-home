@@ -66,6 +66,7 @@ export const it: Translations = {
     submitting: 'Invio in corso…',
     successTitle: 'Richiesta inviata!',
     successMsg: 'Grazie per averci scritto. Ti risponderemo entro 24 ore.',
+    successReset: 'Invia un\'altra richiesta',
     errorMsg: 'Si è verificato un errore. Riprova o scrivici a scjavuruhosteria@libero.it.',
   },
   footer: {
